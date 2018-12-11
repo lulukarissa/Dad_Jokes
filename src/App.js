@@ -12,7 +12,8 @@ class App extends Component {
     axios.get(url)
     .then((x)=>{
         this.setState({
-            jokes: x.data
+            jokes: x.data,
+            emoji: <span role="img">😂😂😂</span>
         })
         console.log(x.data)
     })
@@ -22,12 +23,12 @@ class App extends Component {
   render() {
     
     return (
-      <div style={{margin: "100px"}}>
+      <div className="container text-center" style={{margin: "100px"}}>
           <div className="col-sm-6">
             <div className="card text-center">
               <div className="card-body">
                 <h5 className="card-title">{this.state.jokes.setup}</h5>
-                <p className="card-text">{this.state.jokes.punchline} <br/><span role="img">😂😂😂</span></p>
+                <p className="card-text">{this.state.jokes.punchline} <br/>{this.state.emoji}</p>
                 <button onClick={()=>{window.location.reload()}} className="btn btn-primary">Reload <i class="fas fa-sync-alt"></i></button>
               </div>
             </div>
