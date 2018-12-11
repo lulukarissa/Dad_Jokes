@@ -1,25 +1,37 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import axios from 'axios';
+
 
 class App extends Component {
+  state = {
+      jokes: ''
+  }
+
+  componentDidMount(){
+    var url = 'https://safe-falls-22549.herokuapp.com/random_joke'
+    axios.get(url)
+    .then((x)=>{
+        this.setState({
+            jokes: x.data
+        })
+        console.log(x.data)
+    })
+    .catch()
+  }
+
   render() {
+    
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <div style={{margin: "100px"}}>
+          <div className="col-sm-6">
+            <div className="card text-center">
+              <div className="card-body">
+                <h5 className="card-title">{this.state.jokes.setup}</h5>
+                <p className="card-text">{this.state.jokes.punchline} <br/><span role="img">😂😂😂</span></p>
+                <button onClick={()=>{window.location.reload()}} className="btn btn-primary">Reload <i class="fas fa-sync-alt"></i></button>
+              </div>
+            </div>
+          </div>
       </div>
     );
   }
